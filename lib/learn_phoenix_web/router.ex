@@ -2,7 +2,7 @@ defmodule LearnPhoenixWeb.Router do
   use LearnPhoenixWeb, :router
 
   pipeline :browser do
-    plug :accepts, ["html"]
+    plug :accepts, ["html", "json"]
     plug :fetch_session
     plug :fetch_live_flash
     plug :put_root_layout, {LearnPhoenixWeb.Layouts, :root}
@@ -18,7 +18,9 @@ defmodule LearnPhoenixWeb.Router do
   scope "/", LearnPhoenixWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    get "/", PageController, :index
+    get "/home", PageController, :home
+    get "/redirect_test", PageController, :redirect_test
     get "/hello", HelloController, :index
     get "/hello/:messenger", HelloController, :show
     # resources "/users", UserController do
