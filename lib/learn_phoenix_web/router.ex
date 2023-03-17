@@ -8,7 +8,7 @@ defmodule LearnPhoenixWeb.Router do
     plug :put_root_layout, {LearnPhoenixWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug LearnPhoenixWeb.Plugs.Locale, "en"
+    plug LearnPhoenixWeb.Plugs.Locale, "en" # => Router plug
   end
 
   pipeline :api do
@@ -21,6 +21,16 @@ defmodule LearnPhoenixWeb.Router do
     get "/", PageController, :home
     get "/hello", HelloController, :index
     get "/hello/:messenger", HelloController, :show
+    # resources "/users", UserController do
+    #   resources "/posts", PostController
+    # end
+    # resources "/comments", CommentController, except: [:delete]
+  end
+
+  scope "/admin", LearnPhoenixWeb.Admin do
+    pipe_through :browser
+
+    # resources "/reviews", ReviewController
   end
 
   # Other scopes may use custom stacks.

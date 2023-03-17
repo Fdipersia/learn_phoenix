@@ -35,3 +35,9 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 ### Assigns
 https://hexdocs.pm/phoenix/request_lifecycle.html#another-new-template
 > The values we passed to the view from the controller are collectively called our "assigns". We could access our messenger value via assigns.messenger but through some metaprogramming, Phoenix gives us the much cleaner @ syntax for use in templates.
+
+## Pipelines
+* Pipelines allow a set of plugs to be applied to different sets of routes.
+
+## Verified Routes
+* `~p` This sigil returns an error if the Route doesn't match
