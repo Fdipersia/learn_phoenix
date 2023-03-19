@@ -41,3 +41,20 @@ https://hexdocs.pm/phoenix/request_lifecycle.html#another-new-template
 
 ## Verified Routes
 * `~p` This sigil returns an error if the Route doesn't match
+
+## Ecto
+`mix phx.gen.schema User users name:string email:string`
+
+```
+  iex -S mix
+
+  alias LearnPhoenix.User
+  changeset = User.changeset(%User{}, %{})
+  alias LearnPhoenix.{Repo, User}
+  Repo.insert(%User{email: "user1@example.com"})
+  Repo.all(User)
+  import Ecto.Query
+  Repo.all(from u in User, select: u.email)
+  Repo.one(from u in User, where: ilike(u.email, "%1%"), select: count(u.id))
+```
+
