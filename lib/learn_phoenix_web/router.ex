@@ -18,7 +18,7 @@ defmodule LearnPhoenixWeb.Router do
     plug :accepts, ["json"]
   end
 
-  defp fetch_current_user(conn, _) do
+  def fetch_current_user(conn, _) do
     if user_uuid = get_session(conn, :current_uuid) do
       assign(conn, :current_uuid, user_uuid)
     else
@@ -57,13 +57,18 @@ defmodule LearnPhoenixWeb.Router do
     resources "/cart_items", CartItemController, only: [:create, :delete]
     get "/cart", CartController, :show
     put "/cart", CartController, :update
-    resources "/orders", OrderController, only: [:create, :show]
+    resources "/orders", OrderController
   end
 
   scope "/admin", LearnPhoenixWeb.Admin do
     pipe_through :browser
 
     # resources "/reviews", ReviewController
+  end
+
+  scope "/api", LearnPhoenixWeb do
+    pipe_through :api
+    resources "/urls", UrlController, except: [:new, :edit]
   end
 
   # Other scopes may use custom stacks.
